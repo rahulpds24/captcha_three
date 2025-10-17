@@ -1,24 +1,24 @@
 # Captcha Solver
 
-## Overview
-This project is a simple captcha solver implemented using HTML and JavaScript. It retrieves a captcha image from a URL provided as a query parameter and displays the solved text within 15 seconds.
+This project is a simple captcha solver that supports both PNG and SVG captcha images. It uses Tesseract OCR to extract text from images and can solve captchas within 15 seconds.
 
 ## Features
-- Displays captcha image from the provided URL.
-- Simulates captcha solving and displays the solved text.
-- Default image is provided if no URL is specified.
+- Supports both PNG and SVG captcha images.
+- Solves captcha text within 15 seconds.
+- Easy to use with a simple web interface.
 
-## Getting Started
-1. Clone the repository:
+## Installation
+1. Clone the repository.
+2. Install the required packages:
    ```bash
-   git clone https://github.com/yourusername/captcha_solver.git
-   cd captcha_solver
+   pip install requests Pillow pytesseract
    ```
-2. Open `index.html` in your web browser.
-3. To test with a specific captcha image, append `?url=https://.../image.png` to the URL.
+3. Ensure Tesseract OCR is installed on your system.
+
+## Usage
+1. Run the application.
+2. Enter the URL of the captcha image.
+3. Click 'Solve Captcha' to get the solved text.
 
 ## License
 This project is licensed under the MIT License.
-
-## Acknowledgments
-- Sample captcha image is included in the `attachments` folder.
