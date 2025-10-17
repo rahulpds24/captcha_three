@@ -7,20 +7,20 @@
 </head>
 <body>
     <h1>Captcha Solver</h1>
-    <form id="captchaForm">
-        <label for="captchaUrl">Enter Captcha URL:</label>
-        <input type="text" id="captchaUrl" name="captchaUrl" required>
+    <form id="captcha-form">
+        <label for="captcha-url">Enter Captcha URL:</label>
+        <input type="text" id="captcha-url" name="captcha-url" required>
         <button type="submit">Solve Captcha</button>
     </form>
     <div id="result"></div>
     <script>
-        document.getElementById('captchaForm').onsubmit = async function(event) {
+        document.getElementById('captcha-form').onsubmit = async function(event) {
             event.preventDefault();
-            const url = document.getElementById('captchaUrl').value;
+            const url = document.getElementById('captcha-url').value;
             const response = await fetch('/solve-captcha', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url })
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({url})
             });
             const result = await response.json();
             document.getElementById('result').innerText = result.text;
