@@ -1,8 +1,8 @@
 import requests
+import time
 from PIL import Image
 import pytesseract
-import time
-import io
+from io import BytesIO
 
 class CaptchaSolver:
     def __init__(self, url):
@@ -10,7 +10,10 @@ class CaptchaSolver:
 
     def fetch_captcha(self):
         response = requests.get(self.url)
-        return Image.open(io.BytesIO(response.content))
+        if response.status_code == 200:
+            return Image.open(BytesIO(response.content))
+        else:
+            raise Exception('Failed to fetch captcha')
 
     def solve_captcha(self):
         start_time = time.time()
@@ -18,10 +21,9 @@ class CaptchaSolver:
         captcha_text = pytesseract.image_to_string(captcha_image)
         elapsed_time = time.time() - start_time
         if elapsed_time > 15:
-            raise Exception('Solving time exceeded 15 seconds')
+            raise Exception('Solving captcha took too long')
         return captcha_text.strip()
 
-if __name__ == '__main__':
-    url = 'CAPTCHA_IMAGE_URL'
-    solver = CaptchaSolver(url)
-    print(solver.solve_captcha())
+# Example usage:
+# solver = CaptchaSolver('captcha_image_url')
+# print(solver.solve_captcha())
