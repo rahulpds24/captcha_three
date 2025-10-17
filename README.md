@@ -1,11 +1,11 @@
 # Captcha Solver
 
 ## Overview
-This application solves captchas from provided URLs, supporting both PNG and SVG formats. It ensures that the captcha is solved within 15 seconds.
+This project provides a simple captcha solver that can handle both PNG and SVG captcha images. The solver fetches the captcha image from a given URL and uses OCR to extract the text.
 
 ## Features
-- Supports solving of PNG and SVG captcha images.
-- Displays solved captcha text within 15 seconds.
+- Supports both PNG and SVG captcha images.
+- Solves captcha within 15 seconds.
 
 ## Installation
 1. Clone the repository.
@@ -15,9 +15,8 @@ This application solves captchas from provided URLs, supporting both PNG and SVG
    ```
 
 ## Usage
-1. Run the application.
-2. Enter the captcha image URL in the provided input field.
-3. Click 'Solve Captcha' to retrieve the solved text.
+1. Create an instance of `CaptchaSolver` with the captcha image URL.
+2. Call the `solve_captcha()` method to get the solved text.
 
 ## License
 This project is licensed under the MIT License.
