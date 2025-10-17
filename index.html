@@ -4,39 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Captcha Solver</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        img { max-width: 100%; height: auto; }
-        #captchaText { font-size: 24px; margin-top: 20px; }
-    </style>
 </head>
 <body>
     <h1>Captcha Solver</h1>
-    <img id="captchaImage" src="" alt="Captcha Image">
-    <div id="captchaText">Solving...</div>
+    <form id="captchaForm">
+        <label for="captchaUrl">Enter Captcha URL:</label>
+        <input type="text" id="captchaUrl" name="captchaUrl" required>
+        <button type="submit">Solve Captcha</button>
+    </form>
+    <div id="result"></div>
     <script>
-        function getQueryParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        async function solveCaptcha(imageUrl) {
-            // Simulate captcha solving process
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve('Solved Text'); // Replace with actual solving logic
-                }, 15000);
+        document.getElementById('captchaForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const url = document.getElementById('captchaUrl').value;
+            const response = await fetch('/solve-captcha', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
             });
-        }
-
-        async function displayCaptcha() {
-            const url = getQueryParameter('url') || 'attachments/sample.png';
-            document.getElementById('captchaImage').src = url;
-            const solvedText = await solveCaptcha(url);
-            document.getElementById('captchaText').innerText = solvedText;
-        }
-
-        displayCaptcha();
+            const data = await response.json();
+            document.getElementById('result').innerText = data.result;
+        };
     </script>
 </body>
 </html>
